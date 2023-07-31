@@ -49,7 +49,5 @@ const Products = sequelize.define('products', {
   },
 });
 
-// Define associations if there are any between the models
-// For example, if there is a relationship between users and products, you can define it here.
 
 export { sequelize, Users, Products };

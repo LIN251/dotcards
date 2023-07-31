@@ -39,9 +39,23 @@ Body example:
 5. Got to `http://localhost:3000/users/1` and test Apis 
 
 
+## Automated tests:
+
+1. Automated tests encompass all test cases located in the /src/tests directory.
+
+2. The focus of these tests is primarily on happy cases to enhance the user experience. However, additional negative scenarios (bad cases) may be incorporated as needed.
+
+3. For manual testing, execute the command `npx jest`.
+
+4. All tests will be executed during the project build process.
+
+
+
 
 
 ## Schema:
+
+schema: src/database/setupDatabase.sql
 
 #### Users table
 

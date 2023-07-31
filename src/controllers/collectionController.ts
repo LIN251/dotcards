@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 import { sequelize, Users, Products } from '../sequelize';
-import { readSchemaFile, DatabaseSchema, TableSchema } from '../database/schema';
+import { readSchemaFile, DatabaseSchema } from '../database/schema';
 
 
 // Read the schema on server startup
