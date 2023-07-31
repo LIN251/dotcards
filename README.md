@@ -3,12 +3,12 @@ Default Host: localhost
 
 Default Port: 3000
 
-GET http://localhost:3000/users/1
+1. GET http://localhost:3000/users/1
 
-DELETE http://localhost:3000/users/3
+2. DELETE http://localhost:3000/users/3
 
 
-POST http://localhost:3000/users
+3. POST http://localhost:3000/users
 
 Body example:
 `{
@@ -17,7 +17,7 @@ Body example:
 }`
 
 
-POST http://localhost:3000/users/3
+4. POST http://localhost:3000/users/3
 
 Body example:
 `{
