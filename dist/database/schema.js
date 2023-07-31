@@ -6,7 +6,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.readSchemaFile = void 0;
 const fs_1 = __importDefault(require("fs"));
 const path_1 = __importDefault(require("path"));
-// Function to read the schema file and parse its content
+// Read the schema file and parse its content
 function readSchemaFile() {
     const schemaFilePath = path_1.default.join(__dirname, '../database/schema.json');
     try {
@@ -15,7 +15,8 @@ function readSchemaFile() {
     }
     catch (error) {
         console.error('Error reading schema file:', error);
-        return {}; // Return an empty object in case of error
+        return {};
+        // Return an empty object in case of error
     }
 }
 exports.readSchemaFile = readSchemaFile;

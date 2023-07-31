@@ -15,25 +15,30 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const fs_1 = __importDefault(require("fs"));
 const path_1 = __importDefault(require("path"));
 const promise_1 = __importDefault(require("mysql2/promise"));
+const dotenv_1 = __importDefault(require("dotenv"));
+dotenv_1.default.config();
+// get the database configuration from environment variables
 const dbConfig = {
-    host: 'localhost',
-    user: 'root',
-    password: 'password'
+    host: process.env.DB_HOST || 'localhost',
+    user: process.env.DB_USER || 'root',
+    password: process.env.DB_PASSWORD,
 };
+// Create the database and tables if they do not exist
 function setupDatabase() {
     return __awaiter(this, void 0, void 0, function* () {
+        const databaseName = process.env.DB_NAME || 'dotcards';
         try {
             const connection = yield promise_1.default.createConnection(dbConfig);
             // Check if the database exists
-            const [rows] = yield connection.query('SHOW DATABASES LIKE "dotcards"');
+            const [rows] = yield connection.query('SHOW DATABASES LIKE ?', [databaseName]);
             const databaseExists = rows.length > 0;
             if (!databaseExists) {
                 // Create the database if it does not exist
-                yield connection.query('CREATE DATABASE dotcards');
-                console.log('Database "dotcards" created!');
+                yield connection.query('CREATE DATABASE ??', [databaseName]);
+                console.log(`Database "${databaseName}" created!`);
             }
-            // Use the 'dotcards' database
-            yield connection.query('USE dotcards');
+            // Use the database
+            yield connection.query('USE ??', [databaseName]);
             // Read and execute the 'setupDatabase.sql' script
             const schemaFilePath = path_1.default.join(__dirname, 'setupDatabase.sql');
             const schemaSql = fs_1.default.readFileSync(schemaFilePath, 'utf8');

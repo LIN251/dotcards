@@ -14,6 +14,7 @@ const sequelize_1 = require("../sequelize");
 const schema_1 = require("../database/schema");
 // Read the schema on server startup
 const schema = (0, schema_1.readSchemaFile)();
+// create a new collection
 function createCollection(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
         const { collection } = req.params;
@@ -42,6 +43,7 @@ function createCollection(req, res) {
     });
 }
 exports.createCollection = createCollection;
+// get one item by id in a collection
 function getCollectionById(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
         const { collection, id } = req.params;
@@ -59,6 +61,7 @@ function getCollectionById(req, res) {
     });
 }
 exports.getCollectionById = getCollectionById;
+// get one item in a collection
 function updateCollection(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
         const { collection, id } = req.params;
@@ -77,6 +80,7 @@ function updateCollection(req, res) {
     });
 }
 exports.updateCollection = updateCollection;
+// delete an item in a collection
 function deleteCollection(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
         const { collection, id } = req.params;

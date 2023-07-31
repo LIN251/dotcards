@@ -6,8 +6,10 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const collectionController_1 = require("./controllers/collectionController");
 const sequelize_1 = require("./sequelize");
+const dotenv_1 = __importDefault(require("dotenv"));
+dotenv_1.default.config();
 const app = (0, express_1.default)();
-const port = 3000;
+const port = process.env.PORT || 3000;
 // Middleware to parse incoming JSON data
 app.use(express_1.default.json());
 // CRUD routes

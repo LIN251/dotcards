@@ -2,9 +2,11 @@
 import express from 'express';
 import { createCollection, getCollectionById, updateCollection, deleteCollection } from './controllers/collectionController';
 import { sequelize } from './sequelize';
+import dotenv from 'dotenv';
+dotenv.config();
 
 const app = express();
-const port = 3000; 
+const port = process.env.PORT || 3000; 
 
 // Middleware to parse incoming JSON data
 app.use(express.json());

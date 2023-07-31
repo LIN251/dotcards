@@ -6,6 +6,7 @@ import { readSchemaFile, DatabaseSchema, TableSchema } from '../database/schema'
 // Read the schema on server startup
 const schema: DatabaseSchema = readSchemaFile();
 
+// create a new collection
 export async function createCollection(req: Request, res: Response) {
   const { collection } = req.params;
   const tableSchema = schema[collection];
@@ -32,6 +33,7 @@ export async function createCollection(req: Request, res: Response) {
   }
 }
 
+// get one item by id in a collection
 export async function getCollectionById(req: Request, res: Response) {
   const { collection, id } = req.params;
   const model = sequelize.models[collection];
@@ -47,6 +49,8 @@ export async function getCollectionById(req: Request, res: Response) {
   }
 }
 
+
+// get one item in a collection
 export async function updateCollection(req: Request, res: Response) {
   const { collection, id } = req.params;
   const model = sequelize.models[collection];
@@ -65,6 +69,7 @@ export async function updateCollection(req: Request, res: Response) {
   }
 }
 
+// delete an item in a collection
 export async function deleteCollection(req: Request, res: Response) {
   const { collection, id } = req.params;
   const model = sequelize.models[collection];

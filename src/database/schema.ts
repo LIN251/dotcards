@@ -11,7 +11,7 @@ export interface DatabaseSchema {
   [tableName: string]: TableSchema;
 }
 
-// Function to read the schema file and parse its content
+// Read the schema file and parse its content
 export function readSchemaFile(): DatabaseSchema {
   const schemaFilePath = path.join(__dirname, '../database/schema.json');
   try {
@@ -19,6 +19,7 @@ export function readSchemaFile(): DatabaseSchema {
     return JSON.parse(data) as DatabaseSchema;
   } catch (error) {
     console.error('Error reading schema file:', error);
-    return {}; // Return an empty object in case of error
+    return {};
+    // Return an empty object in case of error
   }
 }

@@ -1,12 +1,17 @@
 "use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Products = exports.Users = exports.sequelize = void 0;
 const sequelize_1 = require("sequelize");
+const dotenv_1 = __importDefault(require("dotenv"));
+dotenv_1.default.config();
 const dbConfig = {
-    database: 'dotcards',
-    user: 'root',
-    password: 'password',
-    host: 'localhost',
+    database: process.env.DB_NAME || 'dotcards',
+    user: process.env.DB_USER || 'root',
+    password: process.env.DB_PASSWORD,
+    host: process.env.DB_HOST || "localhost"
 };
 // Use a MySQL database
 const sequelize = new sequelize_1.Sequelize(dbConfig.database, dbConfig.user, dbConfig.password, {
