@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "tsc && node src/database/copySqlFile.js",
+    "build": "tsc && node src/database/copySqlFile.js && node dist/database/setupDatabase.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],

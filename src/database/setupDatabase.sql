@@ -1,4 +1,3 @@
--- schema.sql
 -- Drop tables if they exist
 DROP TABLE IF EXISTS users;
 DROP TABLE IF EXISTS products;
@@ -7,7 +6,9 @@ DROP TABLE IF EXISTS products;
 CREATE TABLE users (
   id INT PRIMARY KEY,
   name VARCHAR(255) NOT NULL,
-  email VARCHAR(255) NOT NULL
+  email VARCHAR(255) NOT NULL,
+  createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  updatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 );
 
 -- Insert default data into 'users' table
@@ -20,7 +21,9 @@ VALUES
 CREATE TABLE products (
   id INT PRIMARY KEY,
   name VARCHAR(255) NOT NULL,
-  price DECIMAL(10, 2) NOT NULL
+  price DECIMAL(10, 2) NOT NULL,
+  createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  updatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 );
 
 -- Insert default data into 'products' table

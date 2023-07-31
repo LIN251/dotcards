@@ -12,37 +12,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.deleteCollection = exports.updateCollection = exports.getCollectionById = exports.createCollection = void 0;
 const sequelize_1 = require("../sequelize");
 const schema_1 = require("../database/schema");
-const sequelize_2 = require("sequelize");
 // Read the schema on server startup
 const schema = (0, schema_1.readSchemaFile)();
-// Define Sequelize models based on the schema
-for (const tableName in schema) {
-    const tableSchema = schema[tableName];
-    const modelAttributes = {};
-    for (const columnName in tableSchema) {
-        const dataType = tableSchema[columnName];
-        modelAttributes[columnName] = {
-            type: getSequelizeDataType(dataType),
-            allowNull: false,
-        };
-    }
-    sequelize_1.sequelize.define(tableName, modelAttributes);
-}
-// Helper function to get the Sequelize data type based on the schema data type
-function getSequelizeDataType(dataType) {
-    // Add more mappings as needed based on your schema data types
-    if (dataType === 'INT' || dataType === 'INTEGER') {
-        return sequelize_2.DataTypes.INTEGER;
-    }
-    else if (dataType === 'VARCHAR') {
-        return sequelize_2.DataTypes.STRING;
-    }
-    else if (dataType === 'DECIMAL') {
-        return sequelize_2.DataTypes.DECIMAL(10, 2); // Change the precision and scale as needed
-    }
-    // Return a default data type if no mapping is found
-    return sequelize_2.DataTypes.STRING;
-}
 function createCollection(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
         const { collection } = req.params;
@@ -51,7 +22,17 @@ function createCollection(req, res) {
             return res.status(404).json({ error: 'Collection not found in the schema' });
         }
         try {
-            const model = sequelize_1.sequelize.models[collection];
+            let model;
+            if (collection === 'users') {
+                model = sequelize_1.Users;
+            }
+            else if (collection === 'products') {
+                model = sequelize_1.Products;
+            }
+            else {
+                // Handle other collections here if needed
+                return res.status(404).json({ error: 'Collection not found' });
+            }
             const newItem = yield model.create(req.body);
             res.json({ message: 'Item created successfully', item: newItem.toJSON() });
         }

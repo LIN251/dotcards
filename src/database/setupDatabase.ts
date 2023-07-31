@@ -11,7 +11,7 @@ const dbConfig = {
 async function setupDatabase() {
   try {
     const connection = await mysql.createConnection(dbConfig);
-
+   
     // Check if the database exists
     const [rows] = await connection.query('SHOW DATABASES LIKE "dotcards"');
     const databaseExists = (rows as any).length > 0;

@@ -1,41 +1,10 @@
 import { Request, Response } from 'express';
 import { sequelize, Users, Products } from '../sequelize';
-import { DatabaseSchema, readSchemaFile, TableSchema } from '../database/schema';
-import { DataTypes, Model } from 'sequelize';
+import { readSchemaFile, DatabaseSchema, TableSchema } from '../database/schema';
+
 
 // Read the schema on server startup
 const schema: DatabaseSchema = readSchemaFile();
-
-// Define Sequelize models based on the schema
-for (const tableName in schema) {
-  const tableSchema: TableSchema = schema[tableName];
-  const modelAttributes: any = {};
-
-  for (const columnName in tableSchema) {
-    const dataType = tableSchema[columnName];
-    modelAttributes[columnName] = {
-      type: getSequelizeDataType(dataType),
-      allowNull: false,
-    };
-  }
-
-  sequelize.define(tableName, modelAttributes);
-}
-
-// Helper function to get the Sequelize data type based on the schema data type
-function getSequelizeDataType(dataType: string): any {
-  // Add more mappings as needed based on your schema data types
-  if (dataType === 'INT' || dataType === 'INTEGER') {
-    return DataTypes.INTEGER;
-  } else if (dataType === 'VARCHAR') {
-    return DataTypes.STRING;
-  } else if (dataType === 'DECIMAL') {
-    return DataTypes.DECIMAL(10, 2); // Change the precision and scale as needed
-  }
-
-  // Return a default data type if no mapping is found
-  return DataTypes.STRING;
-}
 
 export async function createCollection(req: Request, res: Response) {
   const { collection } = req.params;
@@ -45,7 +14,16 @@ export async function createCollection(req: Request, res: Response) {
   }
 
   try {
-    const model = sequelize.models[collection];
+    let model;
+    if (collection === 'users') {
+      model = Users;
+    } else if (collection === 'products') {
+      model = Products;
+    } else {
+      // Handle other collections here if needed
+      return res.status(404).json({ error: 'Collection not found' });
+    }
+
     const newItem = await model.create(req.body);
 
     res.json({ message: 'Item created successfully', item: newItem.toJSON() });
@@ -55,7 +33,6 @@ export async function createCollection(req: Request, res: Response) {
 }
 
 export async function getCollectionById(req: Request, res: Response) {
-  
   const { collection, id } = req.params;
   const model = sequelize.models[collection];
 
