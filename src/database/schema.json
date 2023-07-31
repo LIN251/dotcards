@@ -1,0 +1,46 @@
+{
+    "users": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "primaryKey": true
+        },
+        "name": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 255
+        },
+        "email": {
+          "type": "string",
+          "format": "email",
+          "minLength": 1,
+          "maxLength": 255
+        }
+      },
+      "required": ["id", "name", "email"],
+      "additionalProperties": false
+    },
+    "products": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "primaryKey": true
+        },
+        "name": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 255
+        },
+        "price": {
+          "type": "number",
+          "minimum": 0,
+          "exclusiveMinimum": true
+        }
+      },
+      "required": ["id", "name", "price"],
+      "additionalProperties": false
+    }
+  }
+  
