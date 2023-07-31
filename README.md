@@ -50,7 +50,9 @@ Body example:
 4. All tests will be executed during the project build process.
 
 ## Video Demo 
-[Zoom Link]([URL](https://usc.zoom.us/rec/share/ge3AdtB_ttQwXPzI6OzQS109GPHbDBEKndOGbftSZvM4xoPdakvqXgc-XZBaJL9b.CuhzJPs1DKLQnVIm?startTime=1690829570000))
+Zoom Link: 
+
+https://usc.zoom.us/rec/share/ge3AdtB_ttQwXPzI6OzQS109GPHbDBEKndOGbftSZvM4xoPdakvqXgc-XZBaJL9b.CuhzJPs1DKLQnVIm?startTime=1690829570000
 
 ## Schema:
 
